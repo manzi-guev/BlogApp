@@ -24,6 +24,7 @@ var Blog = mongoose.model('Blog', BlogSchema);
 app.get('/', (req, res) => {
   res.send('Hello');
 });
+//INDEX ROUTE
 app.get('/blogs', (req, res) => {
   Blog.find({}, function(err, allblogs) {
     if (err) {
@@ -33,6 +34,21 @@ app.get('/blogs', (req, res) => {
     }
   });
 });
+//NEW ROUTE
+app.get('/blogs/new', (req, res) => {
+  res.render('new');
+});
 
+//CREATE ROUTE
+
+app.post('/blogs', function(req, res) {
+  Blog.create(req.body.blog, function(err, newBlog) {
+    if (err) {
+      res.render('new');
+    } else {
+      res.redirect('/blogs');
+    }
+  });
+});
 const port = process.env.PORT || 4000;
 app.listen(port, () => console.log(`Server is running`));
