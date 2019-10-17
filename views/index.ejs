@@ -9,22 +9,24 @@
     <link rel="stylesheet" href="/stylesheets/app.css" />
   </head>
   <body>
-    <div class="ui fixed inverted menu">
+    <div class="ui inverted menu">
       <div class="ui container">
         <div class="header item"><i class="code icon"></i> Blog Site</div>
         <a href="/" class="item">Home</a>
         <a href="/blogs/new" class="item">New Post</a>
       </div>
     </div>
-    <h1>Index Page</h1>
-
-    <% blogs.forEach(function(blog){ %>
     <div>
-      <h2><%= blog.title%></h2>
-      <img src="<%=blog.image%>" alt="" />
-      <span><%=blog.createdOn%></span>
-      <p><%=blog.body%></p>
+      <h1>Index Page</h1>
+      <% blogs.forEach(function(blog){ %>
+      <div>
+        <h2><%= blog.title%></h2>
+        <img src="<%=blog.image%>" alt="" />
+        <span><%=blog.createdOn%></span>
+        <p><%=blog.body.substring(0, 100)%>...</p>
+        <a href="/blogs/<%=blog._id%>">Read more</a>
+      </div>
+      <% }) %>
     </div>
-    <% }) %>
   </body>
 </html>
