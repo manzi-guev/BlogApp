@@ -1,0 +1,20 @@
+sudo: false
+language: node_js
+node_js:
+  - "11.15.0"
+branches:
+  only:
+    - master
+install:
+  - npm install
+  - npm install -g coveralls
+cache:
+  directories:
+    - node_modules
+env:
+  global:
+    secure: 
+script:
+  - npm run test
+after_success:
+  - npm run coveralls
