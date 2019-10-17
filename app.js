@@ -22,7 +22,7 @@ var BlogSchema = new mongoose.Schema({
 var Blog = mongoose.model('Blog', BlogSchema);
 // RESTFUL ROUTES
 app.get('/', (req, res) => {
-  res.send('Hello');
+  res.redirect('/blogs');
 });
 //INDEX ROUTE
 app.get('/blogs', (req, res) => {
@@ -47,6 +47,16 @@ app.post('/blogs', function(req, res) {
       res.render('new');
     } else {
       res.redirect('/blogs');
+    }
+  });
+});
+// SHOW ROUTE
+app.get('/blogs/:id', (req, res) => {
+  Blog.findById(req.params.id, function(err, foundBlog) {
+    if (err) {
+      res.redirect('/blogs');
+    } else {
+      res.render('show', { blog: foundBlog });
     }
   });
 });
